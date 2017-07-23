@@ -1,14 +1,13 @@
-function basicOp(operation, value1, value2)
-{
+function basicOp(operation, operand1, operand2) {
   switch (operation) {
     case '+':
-      return value1 + value2;
+      return operand1 + operand2;
     case '-':
-      return value1 - value2;
+      return operand1 - operand2;
     case '*':
-      return value1 * value2;
+      return operand1 * operand2;
     case '/':
-      return value1 / value2;
+      return operand1 / operand2;
     default:
       return "invalid input values";
   }

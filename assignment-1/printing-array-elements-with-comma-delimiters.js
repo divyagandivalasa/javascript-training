@@ -1,3 +1,3 @@
-function printArray(array){
-  return array.toString();
+function printArray(inputArray) {
+  return inputArray.toString();
 }
