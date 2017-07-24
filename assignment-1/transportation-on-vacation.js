@@ -1,13 +1,10 @@
 function rentalCarCost(numberOfDays) {
-  var totalCarRent;
-  if (numberOfDays < 3) {
-    totalCarRent = numberOfDays * 40;
+  var totalCarRent = numberOfDays * 40;
+  if (numberOfDays >= 3 && numberOfDays < 7) {
+    totalCarRent -= 20;
   }
-  else if (numberOfDays >= 3 && numberOfDays < 7) {
-    totalCarRent = (numberOfDays * 40) - 20;
-  }
-  else {
-    totalCarRent = (numberOfDays * 40) - 50;
+  else if (numberOfDays > 7) {
+    totalCarRent -= 50;
   }
   return totalCarRent;
 }
