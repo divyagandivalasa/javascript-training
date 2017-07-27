@@ -36,23 +36,23 @@ function nine(func) {
   return calculation(9, func);
 }
 
-function plus(leftOperand) {
-  return function (rightOperand) {
-    return leftOperand + rightOperand;
+function plus(rightOperand) {
+  return function (leftOperand) {
+    return rightOperand + leftOperand;
   };
 }
-function minus(leftOperand) {
-  return function (rightOperand) {
+function minus(rightOperand) {
+  return function (leftOperand) {
     return rightOperand - leftOperand;
   };
 }
-function times(leftOperand) {
-  return function (rightOperand) {
-    return leftOperand * rightOperand;
+function times(rightOperand) {
+  return function (leftOperand) {
+    return rightOperand * leftOperand;
   };
 }
-function dividedBy(leftOperand) {
-  return function (rightOperand) {
+function dividedBy(rightOperand) {
+  return function (leftOperand) {
     return rightOperand / leftOperand;
   };
 }
