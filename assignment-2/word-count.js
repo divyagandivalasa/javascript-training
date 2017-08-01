@@ -2,8 +2,7 @@ function countWords(str) {
   var updatedString = updateString(str).trim();
   if (updatedString.length != 0 && updatedString != " ") {
     return updatedString.split(" ").length;
-  }
-  else {
+  } else {
     return 0;
   }
 };
