@@ -1,10 +1,10 @@
-function cache(func) {
-  var calls = {};
+function cache(complexFunction) {
+  var cachedResult = {};
   return function () {
-    var key = JSON.stringify(arguments);
-    if (!(key in calls)) {
-      calls[key] = func.apply(null, arguments);
+    var cachedFunction = JSON.stringify(arguments);
+    if (!cachedResult.hasOwnProperty(cachedFunction)) {
+      cachedResult[cachedFunction] = complexFunction.apply(null, arguments);
     }
-    return calls[key];
+    return cachedResult[cachedFunction];
   };
 }
