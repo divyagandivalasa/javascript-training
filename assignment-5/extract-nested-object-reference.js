@@ -1,14 +1,12 @@
-Object.prototype.hash = function (string) {
-    var paths = string.split('.')
-        , current = this
-        , i;
-
-    for (i = 0; i < paths.length; ++i) {
-        if (current[paths[i]] == undefined) {
+Object.prototype.hash = function (nestedPaths) {
+    var paths = nestedPaths.split('.')
+        , result = this;
+    for (var i = 0; i < paths.length; ++i) {
+        if (result[paths[i]] == undefined) {
             return undefined;
         } else {
-            current = current[paths[i]];
+            result = result[paths[i]];
         }
     }
-    return current;
+    return result;
 }
