@@ -1,6 +1,6 @@
 function countWords(str) {
   var wordCount, updatedString = updateString(str).trim();
-  if (updatedString.length != 0 && updatedString != " ") {
+  if (updatedString) {
     wordCount = updatedString.split(" ").length;
   } else {
     wordCount = updatedString.length;
