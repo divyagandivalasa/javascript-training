@@ -2,7 +2,7 @@ var Cat = (function () {
     var catArray = [];
     function Cat(name, weight) {
         var _weight = weight;
-        if (name == null || weight == null) {
+        if (!name || !weight) {
             throw new Error("input not ccorrect");
         } else {
             this.name = name;
