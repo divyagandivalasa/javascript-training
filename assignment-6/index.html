@@ -1,8 +1,28 @@
 <html>
     <head>
-        <title>Youtube Application</title>        
+        <title>Youtube</title>
+        <link rel="stylesheet" href="css/style.css"/>
     </head>
     <body>
-        <script src="C:\Users\Divya_Gandivalasa\Desktop\JavaScript Training\javascript-training\assignment-6\search.js" type="text/javascript"></script>
+        <template class="youtube-tpl">
+            <div class="main-div">
+                <div class="img-div">
+                    <div class="title">
+                    <img alt="video-image"/>
+                </div>
+                <div class="content-div">
+                    <ul class="items-ul">
+                        <li class="channel-title"></li>
+                        <li class="published-date"></li>
+                        <li class="description"></li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+        <script src="js/search-component.js" type="text/javascript"></script>
+        <script src="js/api-handler.js" type="text/javascript"></script>
+        <script src="js/constants.js" type="text/javascript"></script>
+        <script src="js/ui-components.js" type="text/javascript"></script>
+        <script src="js/main.js" type="text/javascript"></script>
     </body>
 </html>
