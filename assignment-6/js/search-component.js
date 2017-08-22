@@ -15,14 +15,17 @@ var SearchComponent = (function () {
     }
     SearchComponent.prototype.getSearchResults = function () {
         var searchText = document.querySelector("#searchtextbox");
-        var result = apihandler.callYoutubeApi(searchText.value);
-       
+        var searchResult = apihandler.callYoutubeApi(searchText.value);
+        searchResult.then(function(result){
+            this.setTotalVideos(result.items);
+            uicomponents.displaySearchResults(this.getTotalVideos());
+        });       
     }
-    SearchComponent.prototype.setTotalVideos = function (videosList) {
-        this.totalVideos = videosList;
+    this.setTotalVideos = function (videosList) {
+        this.totalVideos = (this.totalVideos || []).concat(videosList);
     }
-    SearchComponent.prototype.getTotalVideos = function () {
-        return totalVideos;
+    this.getTotalVideos = function () {
+        return this.totalVideos;
     }
     return SearchComponent;
 })();

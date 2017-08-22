@@ -1,14 +1,12 @@
 var UiComponents = (function(){
     function UiComponents(){};
-  
-    UiComponents.prototype.displaySearchResults = function(){
-        var videosList = search.getTotalVideos();
+    UiComponents.prototype.displaySearchResults = function(videosList){
         var videosDiv = document.createElement("div");
         var fragment = document.createDocumentFragment();
         for (var i=0; i< videosList.length; i++){
-            fragment.appendChild(displayVideo(videosList[i]));
+            fragment.appendChild(this.displayVideo(videosList[i]));
         }
-        videosDiv.appendChild(fragement);
+        videosDiv.appendChild(fragment);
         document.body.appendChild(videosDiv);
     }
     UiComponents.prototype.displayVideo = function(video){
@@ -19,15 +17,15 @@ var UiComponents = (function(){
         img.setAttribute("src", video.snippet.thumbnails.medium.url);
         var title = templateContent.querySelector(".title");
         var titleLink = document.createElement("a");
-        a.setAttribute("href", CONSTANTS.get('YOUTUBE_API_SEARCH_URL')+video.id.videoId);
+        titleLink.setAttribute("href", CONSTANTS.get('YOUTUBE_API_SEARCH_URL')+video.id.videoId);
         titleLink.appendChild(document.createTextNode(video.snippet.title));
         title.appendChild(titleLink);
         var channelTitle = templateContent.querySelector(".channel-title");
-        channelTitle.setAttribute(document.createTextNode(video.snippet.channelTitle));
+        channelTitle.appendChild(document.createTextNode(video.snippet.channelTitle));
         var publishedDate = templateContent.querySelector(".published-date");
-        publishedDate.setAttribute(document.createTextNode(video.snippet.publishedAt));
+        publishedDate.appendChild(document.createTextNode(video.snippet.publishedAt));
         var description = templateContent.querySelector(".description");
-        description.setAttribute(document.createTextNode(video.snippet.description));
+        description.appendChild(document.createTextNode(video.snippet.description));
         return templateContent;
     }
     return UiComponents;
