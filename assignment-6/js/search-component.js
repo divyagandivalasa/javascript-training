@@ -16,13 +16,21 @@ var SearchComponent = (function () {
     SearchComponent.prototype.getSearchResults = function () {
         var searchText = document.querySelector("#searchtextbox");
         var searchResult = apihandler.callYoutubeApi(searchText.value);
-        searchResult.then(function(result){
+        searchResult.then(function (result) {
             this.setTotalVideos(result.items);
             uicomponents.displaySearchResults(this.getTotalVideos());
-        });       
+        });
+    }
+    SearchComponent.prototype.getSearchResults = function () {
+        var searchText = document.querySelector("#searchtextbox");
+        var searchResult = apihandler.callYoutubeApi(searchText.value);
+        searchResult.then(function (result) {
+            this.setTotalVideos(result.items);
+            uicomponents.displaySearchResults(this.getTotalVideos());
+        });
     }
     this.setTotalVideos = function (videosList) {
-        this.totalVideos = (this.totalVideos || []).concat(videosList);
+        this.totalVideos = videosList;
     }
     this.getTotalVideos = function () {
         return this.totalVideos;

@@ -6,6 +6,7 @@ var CONSTANTS = (function () {
         'PART': 'snippet',
         'MAX_RESULTS': '15',
         'YOUTUBE_WATCH_LINK': 'https://www.youtube.com/watch?v=',
+        'YOUTUBE_VIDEOS_LINK':'https://www.googleapis.com/youtube/v3/videos'
     };
     return {
         get: function (name) { return private[name]; }
