@@ -1,14 +1,6 @@
 var ApiHandler = (function () {
     function ApiHandler() { };
-    
-    ApiHandler.prototype.setSearchText = function (input) {
-        this.searchText = input;
-    }
-    ApiHandler.prototype.getSearchText = function () {
-        return this.searchText;
-    }
     ApiHandler.prototype.callYoutubeApi = function (searchText) {
-        this.setSearchText(searchText);
         var params = {
             key: CONSTANTS.get('API_KEY'),
             type: CONSTANTS.get('TYPE'),
@@ -37,7 +29,6 @@ var ApiHandler = (function () {
         return url;
     }
     ApiHandler.prototype.viewsCountCall = function (videoId) {
-        var searchText = this.getSearchText();
         var params = {
             key: CONSTANTS.get('API_KEY'),
             part: CONSTANTS.get('PART')+',statistics',
@@ -52,15 +43,6 @@ var ApiHandler = (function () {
                     reject(error);
                 });
         });
-    }
-
-    ApiHandler.prototype.getViewCount = function (videoId) {
-        var noofVideos;
-        var response = apihandler.viewsCountCall(videoId);
-        response.then(function (result) {
-            noofVideos = result.items[0].statistics.viewCount;
-        });
-        return noofVideos;
     }
     return ApiHandler;
 })();
