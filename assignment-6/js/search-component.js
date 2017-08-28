@@ -13,20 +13,33 @@ var SearchComponent = (function () {
         searchDiv.appendChild(searchTextBox);
         searchDiv.appendChild(searchButton);
         document.body.appendChild(searchDiv);
+        this.pageHandler();
     }
     SearchComponent.prototype.getSearchResults = function () {
         var searchText = document.querySelector("#searchtextbox");
         var searchResult = apihandler.callYoutubeApi(searchText.value);
         searchResult.then(function (result) {
-            this.setTotalVideos(result.items);
-            uicomponents.displaySearchResults(this.getTotalVideos());
+            pagination.setTotalVideos(result.items);
+            uicomponents.displaySearchResults();
         });
     }
-    this.setTotalVideos = function (videosList) {
-        this.totalVideos = videosList;
-    }
-    this.getTotalVideos = function () {
-        return this.totalVideos;
+    SearchComponent.prototype.pageHandler = function () {
+        window.addEventListener('resize', (evt) => {
+            var numberOfVideos = pagination.getTotalVideos(),
+                currentNumberOfCardsInPage = document.querySelectorAll('.main-div').length;
+            if (currentNumberOfCardsInPage === 0) {
+                return;
+            }
+            if (numberOfVideos > currentNumberOfCardsInPage) {
+                uicomponents.displaySearchResults(this.getTotalVideos());
+            } else {
+                if (numberOfVideos < currentNumberOfCardsInPage) {
+                    var searchResults = document.getElementById('search-results');
+                    searchResults.removeChild(searchResults.lastChild);
+                    pagination.renderPaginationControls();
+                }
+            }
+        });
     }
     return SearchComponent;
 })();

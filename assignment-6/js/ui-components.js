@@ -1,19 +1,32 @@
 var UiComponents = (function () {
     function UiComponents() { };
-    this.videosList;
-    UiComponents.prototype.displaySearchResults = function (videosList) {
-        this.videosDiv = videosList;
+    UiComponents.prototype.displaySearchResults = function () {
         var videosDiv = document.createElement("div");
+        videosDiv.classList.add("search-results");
+        var videos = pagination.getTotalVideos();
+        var noOfVideos = pagination.getNumberOfVideosToRender();
+        var startIndex = pagination.getStartIndexForPage();
         var fragment = document.createDocumentFragment();
-        for (var i = 0; i < videosList.length; i++) {
-            fragment.appendChild(this.displayVideo(videosList[i]));
+        this.clearSearchResults();
+        videosDiv.setAttribute("id", "search-results");
+        videosDiv.classList.add("search-results");
+        for (var i = startIndex; i < (startIndex + noOfVideos); i++) {
+             if (videos[i]) {
+                fragment.appendChild(this.displayVideo(videos[i], i));
+            } else {
+                // get next page of records
+            }            
         }
         videosDiv.appendChild(fragment);
         document.body.appendChild(videosDiv);
+        pagination.renderPaginationControls(videos);
+
+        this.attachPageChangeListener();
     }
-    UiComponents.prototype.displayVideo = function (video) {
+    UiComponents.prototype.displayVideo = function (video, index) {
         var template = document.querySelector(".youtube-tpl");
         var templateContent = document.importNode(template.content, true);
+        templateContent.querySelector('.main-div').setAttribute('id', 'video_' + index);
         var mainDiv = templateContent.querySelector(".main-div");
         var img = templateContent.querySelector("img");
         img.setAttribute("src", video.snippet.thumbnails.medium.url);
@@ -32,10 +45,10 @@ var UiComponents = (function () {
         description.appendChild(document.createTextNode("Description: "));
         description.appendChild(document.createTextNode(video.snippet.description));
         var noofValues = templateContent.querySelector(".noofviews");
-        this.getViewCount(video.id.videoId).then(function(response){
+        this.getViewCount(video.id.videoId).then(function (response) {
             noofValues.appendChild(document.createTextNode("No of Views: "));
-             noofValues.appendChild(document.createTextNode(response));
-        })
+            noofValues.appendChild(document.createTextNode(response));
+        });
         return templateContent;
     }
     UiComponents.prototype.getViewCount = function (videoId) {
@@ -43,5 +56,23 @@ var UiComponents = (function () {
             return response.items[0].statistics.viewCount;
         });
     }
+
+    UiComponents.prototype.clearSearchResults = function () {
+        let allcardsEl = document.querySelector('#search-results');
+        if (allcardsEl) {
+            allcardsEl.parentElement.removeChild(allcardsEl);
+        }
+    }
+    UiComponents.prototype.attachPageChangeListener = function () {
+        let paginationControlsEl = document.querySelector('#pagination').firstElementChild;
+        paginationControlsEl.addEventListener('click', (evt) => {
+            if (evt.target.tagName === 'A') {
+                pagination.setCurrentPage(evt.target.text);
+                this.displaySearchResults();
+                pagination.markCurrentPageActive();
+            }
+        });
+    }
+
     return UiComponents;
 })();

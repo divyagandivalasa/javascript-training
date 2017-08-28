@@ -5,7 +5,7 @@ var ApiHandler = (function () {
             key: CONSTANTS.get('API_KEY'),
             type: CONSTANTS.get('TYPE'),
             part: CONSTANTS.get('PART'),
-            maxresults: CONSTANTS.get('MAX_RESULTS'),
+            maxResults: CONSTANTS.get('MAX_RESULTS'),
             q: searchText
         };
         var url = CONSTANTS.get("YOUTUBE_API_SEARCH_URL") + "?" + this.buildUrlparams(params);
