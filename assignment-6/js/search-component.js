@@ -31,7 +31,7 @@ var SearchComponent = (function () {
                 return;
             }
             if (numberOfVideos > currentNumberOfCardsInPage) {
-                uicomponents.displaySearchResults(this.getTotalVideos());
+                uicomponents.displaySearchResults();
             } else {
                 if (numberOfVideos < currentNumberOfCardsInPage) {
                     var searchResults = document.getElementById('search-results');
