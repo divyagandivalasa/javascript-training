@@ -17,7 +17,9 @@ body{
     padding: 10px;
 }
 .items-ul {
-    padding-left: 40px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .items-ul > li {
