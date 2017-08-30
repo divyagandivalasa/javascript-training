@@ -58,14 +58,14 @@ var UiComponents = (function () {
     }
 
     UiComponents.prototype.clearSearchResults = function () {
-        let allcardsEl = document.querySelector('#search-results');
-        if (allcardsEl) {
-            allcardsEl.parentElement.removeChild(allcardsEl);
+        var searchResults = document.querySelector('#search-results');
+        if (searchResults) {
+            searchResults.parentElement.removeChild(searchResults);
         }
     }
     UiComponents.prototype.attachPageChangeListener = function () {
-        let paginationControlsEl = document.querySelector('#pagination').firstElementChild;
-        paginationControlsEl.addEventListener('click', (evt) => {
+        var paginationControls = document.querySelector('#pagination').firstElementChild;
+        paginationControls.addEventListener('click', (evt) => {
             if (evt.target.tagName === 'A') {
                 pagination.setCurrentPage(evt.target.text);
                 this.displaySearchResults();

@@ -18,6 +18,7 @@ var SearchComponent = (function () {
     SearchComponent.prototype.getSearchResults = function () {
         var searchText = document.querySelector("#searchtextbox");
         var searchResult = apihandler.callYoutubeApi(searchText.value);
+        pagination.resetTotalVideos();
         searchResult.then(function (result) {
             pagination.setTotalVideos(result.items);
             uicomponents.displaySearchResults();
@@ -25,15 +26,15 @@ var SearchComponent = (function () {
     }
     SearchComponent.prototype.pageHandler = function () {
         window.addEventListener('resize', (evt) => {
-            var numberOfVideos = pagination.getTotalVideos(),
-                currentNumberOfCardsInPage = document.querySelectorAll('.main-div').length;
-            if (currentNumberOfCardsInPage === 0) {
+            var numberOfVideos = pagination.getNumberOfVideosToRender(),
+                currentNumberOfVideosInPage = document.querySelectorAll('.main-div').length;
+            if (currentNumberOfVideosInPage === 0) {
                 return;
             }
-            if (numberOfVideos > currentNumberOfCardsInPage) {
+            if (numberOfVideos > currentNumberOfVideosInPage) {
                 uicomponents.displaySearchResults();
             } else {
-                if (numberOfVideos < currentNumberOfCardsInPage) {
+                if (numberOfVideos < currentNumberOfVideosInPage) {
                     var searchResults = document.getElementById('search-results');
                     searchResults.removeChild(searchResults.lastChild);
                     pagination.renderPaginationControls();

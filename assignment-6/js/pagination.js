@@ -1,10 +1,10 @@
 var Pagination = (function () {
     function Pagination() { };
     Pagination.prototype.calculateNumberOfPages = function() {
-        var numberOfCardsInCurrentPage = this.getNumberOfVideosToRender();
-        var totalCards = this.getTotalVideos().length;
-        var additionalPagesToAdd = totalCards % numberOfCardsInCurrentPage === 0 ? 0 : 1;
-        var numberOfpages = Math.floor(totalCards / numberOfCardsInCurrentPage) + additionalPagesToAdd;
+        var numberOfVideosInCurrentPage = this.getNumberOfVideosToRender();
+        var totalVideos = this.getTotalVideos().length;
+        var additionalPagesToAdd = totalVideos % numberOfVideosInCurrentPage === 0 ? 0 : 1;
+        var numberOfpages = Math.floor(totalVideos / numberOfVideosInCurrentPage) + additionalPagesToAdd;
         return numberOfpages;
     }
     Pagination.prototype.renderPaginationControls = function () {
@@ -14,10 +14,10 @@ var Pagination = (function () {
 
     Pagination.prototype.renderPageNumbers = function (numberOfpages) {
         this.clearPaginationControls();
-        var paginationEl = document.createElement('div');
-        paginationEl.setAttribute('id', 'pagination');
-        var paginationControlsEl = document.createElement('div');
-        paginationControlsEl.classList.add('pagination-controls')
+        var pagination = document.createElement('div');
+        pagination.setAttribute('id', 'pagination');
+        var paginationControls = document.createElement('div');
+        paginationControls.classList.add('pagination-controls')
         var fragment = document.createDocumentFragment();
         for (var i = 0; i < numberOfpages; i++) {
             var aTag = document.createElement('a');
@@ -26,16 +26,16 @@ var Pagination = (function () {
             aTag.setAttribute('href', '#');
             fragment.appendChild(aTag);
         }
-        paginationControlsEl.appendChild(fragment);
-        paginationEl.appendChild(paginationControlsEl);
-        document.body.appendChild(paginationEl);
+        paginationControls.appendChild(fragment);
+        pagination.appendChild(paginationControls);
+        document.body.appendChild(pagination);
         this.markCurrentPageActive();
     }
 
     Pagination.prototype.clearPaginationControls = function () {
-        var paginationEl = document.querySelector('#pagination');
-        if (paginationEl) {
-            paginationEl.parentElement.removeChild(paginationEl);
+        var pagination = document.querySelector('#pagination');
+        if (pagination) {
+            pagination.parentElement.removeChild(pagination);
         }
     }
 
@@ -100,6 +100,5 @@ var Pagination = (function () {
 
         aTag.classList.add('active');
     }
-
     return Pagination;
 })();
