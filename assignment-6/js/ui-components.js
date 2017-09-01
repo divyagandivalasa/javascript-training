@@ -20,7 +20,6 @@ var UiComponents = (function () {
         videosDiv.appendChild(fragment);
         document.body.appendChild(videosDiv);
         pagination.renderPaginationControls(videos);
-
         this.attachPageChangeListener();
     }
     UiComponents.prototype.displayVideo = function (video, index) {
@@ -73,10 +72,11 @@ var UiComponents = (function () {
     }
     UiComponents.prototype.attachPageChangeListener = function () {
         var paginationControls = document.querySelector('#pagination').firstElementChild;
-        paginationControls.addEventListener('click', (evt) => {
+        var currentInstance = this;
+        paginationControls.addEventListener('click', function(evt){
             if (evt.target.tagName === 'A') {
                 pagination.setCurrentPage(evt.target.text);
-                this.displaySearchResults();
+                currentInstance.displaySearchResults();
                 pagination.markCurrentPageActive();
             }
         });

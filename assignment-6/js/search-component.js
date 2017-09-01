@@ -25,7 +25,7 @@ var SearchComponent = (function () {
         });
     }
     SearchComponent.prototype.pageHandler = function () {
-        window.addEventListener('resize', (evt) => {
+        window.addEventListener('resize', function(evt){
             var numberOfVideos = pagination.getNumberOfVideosToRender(),
                 currentNumberOfVideosInPage = document.querySelectorAll('.main-div').length;
             if (currentNumberOfVideosInPage === 0) {

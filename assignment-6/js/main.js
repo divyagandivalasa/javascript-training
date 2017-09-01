@@ -6,5 +6,5 @@
         uicomponents = new UiComponents();
         search.createSearchComponent();
     }
-        initialize();
-    })();
+    initialize();
+})();
