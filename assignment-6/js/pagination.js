@@ -76,12 +76,6 @@ var Pagination = (function () {
         return numberOfVideos > 1 ? numberOfVideos - 1 : 1;
     }
 
-    Pagination.prototype.getStartIndexForPage = function () {
-        var numberOfVideos = this.getNumberOfVideosToRender();
-        var currentPage = this.getCurrentPage();
-        return (currentPage * numberOfVideos) - numberOfVideos
-    }
-
     Pagination.prototype.markCurrentPageActive = function() {
         var paginationEl = document.querySelector('#pagination').firstElementChild;
         var currentPage = this.getCurrentPage();

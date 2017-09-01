@@ -1,6 +1,6 @@
 describe('Testing the Constructor Functions', function () {
     var apiHandler;
-    beforeEach(function () {
+    beforeAll(function () {
         apiHandler = new ApiHandler();
     });
     it("No of videos should be 15", function (done) {
